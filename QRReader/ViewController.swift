@@ -44,6 +44,7 @@ class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
         } catch {
             //Generate error
             print("ERROR")
+            print(error.localizedDescription)
         }
         
         // Output set to METAdataOutput
@@ -54,7 +55,7 @@ class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
         output.setMetadataObjectsDelegate(self, queue: DispatchQueue.main)
         
         // Output type set to QR
-        output.metadataObjectTypes = [AVMetadataObject.ObjectType.qr]
+        output.metadataObjectTypes = supportedCodeTypes
         
         //Video session added to sublayer
         video = AVCaptureVideoPreviewLayer(session: session)
@@ -63,9 +64,24 @@ class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
         
         // session running for AVCapture
         session.startRunning()
-        
     }
 
+    
+    func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection) {
+        
+        if metadataObjects != nil {
+            if let objects = metadataObjects[0] as? AVMetadataMachineReadableCodeObject {
+                if objects.type == AVMetadataObject.ObjectType.qr {
+                    let alert = UIAlertController(title: "QR Code", message: objects.stringValue, preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "Retake", style: .default, handler: nil))
+                    alert.addAction(UIAlertAction(title: "Copy", style: .default, handler: { (nil) in
+                        UIPasteboard.general.string = objects.stringValue
+                    }))
+                    present(alert,animated: true,completion: nil)
+                }
+            }
+        }
+    }
 
 }
 
