@@ -120,6 +120,9 @@ class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
             // Vibration genrated if QR code detected
             AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_Vibrate))
             
+            // Change QR imageView after QR is detected
+            QRimageView.image = UIImage(named: "QR")
+            
             // Write your code here to use the generated output
             found(code: stringValue) //Example written here
         }
