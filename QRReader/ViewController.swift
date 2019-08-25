@@ -11,83 +11,102 @@ import AVFoundation
 
 class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
     
-    var video = AVCaptureVideoPreviewLayer()
-    
     //MARK:- Outlets
     @IBOutlet weak var QRimageView: UIImageView!
     @IBOutlet weak var scanButton: UIButton!
     
     
-    //Supported code types also included bar code reader
-    private let supportedCodeTypes = [AVMetadataObject.ObjectType.upce,
-                                      AVMetadataObject.ObjectType.code39,
-                                      AVMetadataObject.ObjectType.code39Mod43,
-                                      AVMetadataObject.ObjectType.code93,
-                                      AVMetadataObject.ObjectType.code128,
-                                      AVMetadataObject.ObjectType.ean8,
-                                      AVMetadataObject.ObjectType.ean13,
-                                      AVMetadataObject.ObjectType.aztec,
-                                      AVMetadataObject.ObjectType.pdf417,
-                                      AVMetadataObject.ObjectType.itf14,
-                                      AVMetadataObject.ObjectType.dataMatrix,
-                                      AVMetadataObject.ObjectType.interleaved2of5,
-                                      AVMetadataObject.ObjectType.qr]
+    var captureSession: AVCaptureSession!
+    var previewLayer: AVCaptureVideoPreviewLayer!
     
-
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //Define session
-        let session = AVCaptureSession()
+        view.backgroundColor = UIColor.black
+        captureSession = AVCaptureSession()
         
-        //Define capture device
-        let captureDevice = AVCaptureDevice.default(for: AVMediaType.video)
+        guard let videoCaptureDevice = AVCaptureDevice.default(for: .video) else { return }
+        let videoInput: AVCaptureDeviceInput
+        
         do {
-            //IF sucess
-            let input = try AVCaptureDeviceInput(device: captureDevice!)
-            session.addInput(input)
+            videoInput = try AVCaptureDeviceInput(device: videoCaptureDevice)
         } catch {
-            //Generate error
-            print("ERROR")
-            print(error.localizedDescription)
+            return
         }
         
-        // Output set to METAdataOutput
-        let output = AVCaptureMetadataOutput()
-        session.addOutput(output)
+        if (captureSession.canAddInput(videoInput)) {
+            captureSession.addInput(videoInput)
+        } else {
+            failed()
+            return
+        }
         
-        // OUtput set to Main thread for better performance
-        output.setMetadataObjectsDelegate(self, queue: DispatchQueue.main)
+        let metadataOutput = AVCaptureMetadataOutput()
         
-        // Output type set to QR
-        output.metadataObjectTypes = supportedCodeTypes
+        if (captureSession.canAddOutput(metadataOutput)) {
+            captureSession.addOutput(metadataOutput)
+            
+            metadataOutput.setMetadataObjectsDelegate(self, queue: DispatchQueue.main)
+            metadataOutput.metadataObjectTypes = [.qr]
+        } else {
+            failed()
+            return
+        }
         
-        //Video session added to sublayer
-        video = AVCaptureVideoPreviewLayer(session: session)
-        video.frame = view.layer.bounds
-        view.layer.addSublayer(video)
-        self.view.bringSubviewToFront(QRimageView)
-        self.view.bringSubviewToFront(scanButton)
+        previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
+        previewLayer.frame = view.layer.bounds
+        previewLayer.videoGravity = .resizeAspectFill
+        view.layer.addSublayer(previewLayer)
         
-        // session running for AVCapture
-        session.startRunning()
+        captureSession.startRunning()
     }
-
+    
+    func failed() {
+        let ac = UIAlertController(title: "Scanning not supported", message: "Your device does not support scanning a code from an item. Please use a device with a camera.", preferredStyle: .alert)
+        ac.addAction(UIAlertAction(title: "OK", style: .default))
+        present(ac, animated: true)
+        captureSession = nil
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if (captureSession?.isRunning == false) {
+            captureSession.startRunning()
+        }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        if (captureSession?.isRunning == true) {
+            captureSession.stopRunning()
+        }
+    }
     
     func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection) {
+        captureSession.stopRunning()
         
-        if metadataObjects != nil {
-            if let objects = metadataObjects[0] as? AVMetadataMachineReadableCodeObject {
-                if objects.type == AVMetadataObject.ObjectType.qr {
-                    let alert = UIAlertController(title: "QR Code", message: objects.stringValue, preferredStyle: .alert)
-                    alert.addAction(UIAlertAction(title: "Retake", style: .default, handler: nil))
-                    alert.addAction(UIAlertAction(title: "Copy", style: .default, handler: { (nil) in
-                        UIPasteboard.general.string = objects.stringValue
-                    }))
-                    present(alert,animated: true,completion: nil)
-                }
-            }
+        if let metadataObject = metadataObjects.first {
+            guard let readableObject = metadataObject as? AVMetadataMachineReadableCodeObject else { return }
+            guard let stringValue = readableObject.stringValue else { return }
+            AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_Vibrate))
+            found(code: stringValue)
         }
+        
+        dismiss(animated: true)
+    }
+    
+    func found(code: String) {
+        print(code)
+    }
+    
+    override var prefersStatusBarHidden: Bool {
+        return true
+    }
+    
+    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        return .portrait
     }
     
     
