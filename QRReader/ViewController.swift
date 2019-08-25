@@ -13,6 +13,9 @@ class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
     
     var video = AVCaptureVideoPreviewLayer()
     
+    //MARK:- Outlets
+    @IBOutlet weak var QRimageView: UIImageView!
+    
     //Supported code types also included bar code reader
     private let supportedCodeTypes = [AVMetadataObject.ObjectType.upce,
                                       AVMetadataObject.ObjectType.code39,
@@ -61,6 +64,7 @@ class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
         video = AVCaptureVideoPreviewLayer(session: session)
         video.frame = view.layer.bounds
         view.layer.addSublayer(video)
+        self.view.bringSubviewToFront(QRimageView)
         
         // session running for AVCapture
         session.startRunning()
