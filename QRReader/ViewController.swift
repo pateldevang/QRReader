@@ -24,6 +24,7 @@ class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        // Hide scan button
         scanButton.isHidden = true
         scan()
     }
@@ -135,10 +136,9 @@ class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
             
             // Write your code here to use the generated output
             found(code: stringValue) //Example written here
+            // TO generate alert
             alert(url: stringValue, code: stringValue)
         }
-        
-//        dismiss(animated: true)
     }
     
     //MARK:- Found function to print output in debug console
