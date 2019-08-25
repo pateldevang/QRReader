@@ -33,7 +33,7 @@
                                     <constraint firstAttribute="height" constant="39" id="nCJ-pp-GtH"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="25"/>
-                                <state key="normal" title="scan">
+                                <state key="normal" title="retake">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>

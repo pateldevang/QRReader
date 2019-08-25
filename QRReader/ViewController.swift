@@ -24,6 +24,7 @@ class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        scanButton.isHidden = true
         scan()
     }
     
@@ -31,6 +32,12 @@ class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
     //MARK:- Scan start function
     
     func scan() {
+        
+        // Retake button hide
+        scanButton.isHidden = true
+        
+        //Change QR frame image
+        QRimageView.image = UIImage(named: "Focus")
         
         view.backgroundColor = UIColor.black
         //AV session
@@ -123,11 +130,15 @@ class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
             // Change QR imageView after QR is detected
             QRimageView.image = UIImage(named: "QR")
             
+            // Unhide retake button
+            self.scanButton.isHidden = false
+            
             // Write your code here to use the generated output
             found(code: stringValue) //Example written here
+            alert(url: stringValue)
         }
         
-        dismiss(animated: true)
+//        dismiss(animated: true)
     }
     
     //MARK:- Found function to print output in debug console
@@ -148,7 +159,21 @@ class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
     //MARK:- Scan button can be used if user need to scan the code manually
     @IBAction func scanAction(_ sender: UIButton) {
         scan()
-        QRimageView.image = UIImage(named: "QR")
+    }
+    
+    
+    //MARK:- Alert function
+    
+    func alert(url: String) {
+        let alert = UIAlertController(title: "QR Code detcted", message: "Please follow next steps", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Retake", style: .default, handler: { (nil) in
+            self.scan()
+        }))
+        alert.addAction(UIAlertAction(title: "Open URL", style: .default, handler: { (nil) in
+            guard let url = URL(string: url) else { return }
+            UIApplication.shared.open(url)
+        }))
+        present(alert,animated: true,completion: nil)
     }
     
 }
