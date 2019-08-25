@@ -109,14 +109,17 @@ class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
     // MetaData Output handler
     func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection) {
         
-        //AV session stop after input is generated
+        //AV session stop after input is generated comment out if you need to scan continouly
         captureSession.stopRunning()
         
         
         if let metadataObject = metadataObjects.first {
             guard let readableObject = metadataObject as? AVMetadataMachineReadableCodeObject else { return }
             guard let stringValue = readableObject.stringValue else { return }
+            
+            // Vibration genrated if QR code detected
             AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_Vibrate))
+            
             // Write your code here to use the generated output
             found(code: stringValue) //Example written here
         }
