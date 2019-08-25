@@ -7,12 +7,31 @@
 //
 
 import UIKit
+import AVFoundation
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
+    
+    var video = AVCaptureVideoPreviewLayer()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        
+        //Define session
+        let session = AVCaptureSession()
+        
+        //Define capture device
+        let captureDevice = AVCaptureDevice.default(for: AVMediaType.video)
+        do {
+            let input = try AVCaptureDeviceInput(device: captureDevice!)
+            session.addInput(input)
+        } catch {
+            print("ERROR")
+        }
+        
+        let output = AVCaptureMetadataOutput()
+        session.addOutput(output)
+        
     }
 
 
