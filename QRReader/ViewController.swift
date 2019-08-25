@@ -57,6 +57,8 @@ class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
         previewLayer.frame = view.layer.bounds
         previewLayer.videoGravity = .resizeAspectFill
         view.layer.addSublayer(previewLayer)
+        view.addSubview(QRimageView)
+        view.addSubview(scanButton)
         
         captureSession.startRunning()
     }
