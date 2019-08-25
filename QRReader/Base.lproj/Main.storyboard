@@ -18,30 +18,50 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="QR" translatesAutoresizingMaskIntoConstraints="NO" id="EMO-hw-GGM">
-                                <rect key="frame" x="27.5" y="173.5" width="320" height="320"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Focus" translatesAutoresizingMaskIntoConstraints="NO" id="EMO-hw-GGM">
+                                <rect key="frame" x="0.0" y="148.5" width="375" height="370"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="320" id="BKo-1h-PAM"/>
-                                    <constraint firstAttribute="width" constant="320" id="bJm-uo-U4W"/>
+                                    <constraint firstAttribute="height" constant="370" id="BKo-1h-PAM"/>
+                                    <constraint firstAttribute="width" constant="375" id="bJm-uo-U4W"/>
                                 </constraints>
                             </imageView>
+                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gi0-Oj-5bq">
+                                <rect key="frame" x="110.5" y="560" width="154" height="39"/>
+                                <color key="backgroundColor" red="1" green="0.69410232839999997" blue="0.0" alpha="0.78836686639999998" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="154" id="Dsr-yi-W0C"/>
+                                    <constraint firstAttribute="height" constant="39" id="nCJ-pp-GtH"/>
+                                </constraints>
+                                <state key="normal" title="Button">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.CornerRadius">
+                                        <integer key="value" value="15"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="EMO-hw-GGM" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="QN5-yq-aez"/>
+                            <constraint firstItem="Gi0-Oj-5bq" firstAttribute="top" secondItem="EMO-hw-GGM" secondAttribute="bottom" constant="41.5" id="Zmk-T1-M33"/>
                             <constraint firstItem="EMO-hw-GGM" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="gfs-MH-qHD"/>
+                            <constraint firstItem="Gi0-Oj-5bq" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="kbd-n0-inl"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
                         <outlet property="QRimageView" destination="EMO-hw-GGM" id="53f-TP-YQC"/>
+                        <outlet property="scanButton" destination="Gi0-Oj-5bq" id="5ti-MP-TB6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="61.600000000000001" y="59.820089955022496"/>
         </scene>
     </scenes>
     <resources>
-        <image name="QR" width="1080" height="1080"/>
+        <image name="Focus" width="414" height="414"/>
     </resources>
 </document>

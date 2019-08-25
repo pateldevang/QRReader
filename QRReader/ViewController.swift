@@ -16,6 +16,7 @@ class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
     //MARK:- Outlets
     @IBOutlet weak var QRimageView: UIImageView!
     
+    @IBOutlet weak var scanButton: UIButton!
     //Supported code types also included bar code reader
     private let supportedCodeTypes = [AVMetadataObject.ObjectType.upce,
                                       AVMetadataObject.ObjectType.code39,
