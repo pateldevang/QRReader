@@ -135,7 +135,7 @@ class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
             
             // Write your code here to use the generated output
             found(code: stringValue) //Example written here
-            alert(url: stringValue)
+            alert(url: stringValue, code: stringValue)
         }
         
 //        dismiss(animated: true)
@@ -164,8 +164,8 @@ class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
     
     //MARK:- Alert function
     
-    func alert(url: String) {
-        let alert = UIAlertController(title: "QR Code detcted", message: "Please follow next steps", preferredStyle: .alert)
+    func alert(url: String, code: String) {
+        let alert = UIAlertController(title: "QR Code detcted", message: code, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Retake", style: .default, handler: { (nil) in
             self.scan()
         }))
