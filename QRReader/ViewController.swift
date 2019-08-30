@@ -52,7 +52,7 @@ class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
         
         if till == true {
             
-            let duration: Double = 1.75
+            let duration: Double = 1.6
             UIView.animate(withDuration: duration, animations: {
                 self.moveDown(view: self.scannerView)
                 
