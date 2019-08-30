@@ -8,11 +8,21 @@ QR code reader Boilerplate.
 <td>
 <img src="https://github.com/pateldevang/QRReader/blob/master/Screenshots/demo.gif" width="330">
 </td>
-<td><img src="https://github.com/pateldevang/QRReader/blob/master/Screenshots/QR.png" width="360"></td>
+<td><img src="https://github.com/pateldevang/QRReader/blob/master/Screenshots/QR.png" width="330"></td>
   </tr>
   </table>
 
 
+
+## Barcode
+
+<table>
+<tr>
+<td>
+<img src="https://github.com/pateldevang/QRReader/blob/master/Screenshots/barcode.png" width="330">
+</td>
+  </tr>
+  </table>
 
 ## Requirements
 - iOS 10.0 or later
