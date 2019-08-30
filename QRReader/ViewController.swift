@@ -80,6 +80,8 @@ class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
 //        let pinchRecognizer = UIPinchGestureRecognizer(target: self, action:#selector(pinch(_:)))
 //        self.view.addGestureRecognizer(pinchRecognizer)
         
+        // Unhide ScannerView
+        scannerView.isHidden = false
         
         // Retake button hide
         scanButton.isHidden = true
@@ -178,6 +180,9 @@ class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
             // Change QR imageView after QR is detected
             QRimageView.image = UIImage(named: "QR")
             
+            // Hide ScannerView
+            self.scannerView.isHidden = true
+            
             // Unhide retake button
             self.scanButton.isHidden = false
             
@@ -206,6 +211,8 @@ class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
     //MARK:- Scan button can be used if user need to scan the code manually
     @IBAction func scanAction(_ sender: UIButton) {
         scan()
+        scannerView.center.y = 179.0
+        viewAnimate(till: true)
     }
     
     

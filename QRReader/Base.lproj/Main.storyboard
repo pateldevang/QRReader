@@ -19,14 +19,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Focus" translatesAutoresizingMaskIntoConstraints="NO" id="EMO-hw-GGM">
-                                <rect key="frame" x="0.0" y="148.5" width="375" height="370"/>
+                                <rect key="frame" x="25" y="171" width="325" height="325"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="370" id="BKo-1h-PAM"/>
-                                    <constraint firstAttribute="width" constant="375" id="bJm-uo-U4W"/>
+                                    <constraint firstAttribute="height" constant="325" id="BKo-1h-PAM"/>
+                                    <constraint firstAttribute="width" constant="325" id="bJm-uo-U4W"/>
                                 </constraints>
                             </imageView>
                             <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gi0-Oj-5bq">
-                                <rect key="frame" x="110.5" y="560" width="154" height="39"/>
+                                <rect key="frame" x="110.5" y="537.5" width="154" height="39"/>
                                 <color key="backgroundColor" red="1" green="0.69410232839999997" blue="0.0" alpha="0.78836686639999998" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="154" id="Dsr-yi-W0C"/>
@@ -46,7 +46,7 @@
                                 </connections>
                             </button>
                             <view alpha="0.69999999999999996" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CqA-ab-Hud">
-                                <rect key="frame" x="10" y="159" width="354" height="4"/>
+                                <rect key="frame" x="34" y="179" width="306.5" height="4"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.11426838730462949" green="0.52822657012697405" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
