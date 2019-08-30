@@ -18,6 +18,22 @@ class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
     @IBOutlet weak var scanButton: UIButton!
     
     
+    //MARK:- Variables
+    // supported machine reader code formats
+    private let supportedCodeTypes = [AVMetadataObject.ObjectType.upce,
+                                      AVMetadataObject.ObjectType.code39,
+                                      AVMetadataObject.ObjectType.code39Mod43,
+                                      AVMetadataObject.ObjectType.code93,
+                                      AVMetadataObject.ObjectType.code128,
+                                      AVMetadataObject.ObjectType.ean8,
+                                      AVMetadataObject.ObjectType.ean13,
+                                      AVMetadataObject.ObjectType.aztec,
+                                      AVMetadataObject.ObjectType.pdf417,
+                                      AVMetadataObject.ObjectType.itf14,
+                                      AVMetadataObject.ObjectType.dataMatrix,
+                                      AVMetadataObject.ObjectType.interleaved2of5,
+                                      AVMetadataObject.ObjectType.qr]
+    
     // AVCaputure seesion initialise
     
     var captureSession: AVCaptureSession!
@@ -81,7 +97,7 @@ class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
             captureSession.addOutput(metadataOutput)
             
             metadataOutput.setMetadataObjectsDelegate(self, queue: DispatchQueue.main)
-            metadataOutput.metadataObjectTypes = [.qr]
+            metadataOutput.metadataObjectTypes = supportedCodeTypes
         } else {
             failed()
             return
