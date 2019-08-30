@@ -1,8 +1,23 @@
 # QRReader
 QR code reader Boilerplate.
 
-This app is Boilerplate for QR code scanner.
 
+
+<table>
+<tr>
+<td>
+<img src="https://github.com/pateldevang/QRReader/blob/master/Screenshots/demo.gif" width="330">
+</td>
+<td><img src="https://github.com/pateldevang/QRReader/blob/master/Screenshots/QR.png" width="360"></td>
+  </tr>
+  </table>
+
+
+
+## Requirements
+- iOS 10.0 or later
+- Swift 5+
+- Xcode 10+
 
 
 
