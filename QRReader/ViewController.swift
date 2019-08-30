@@ -13,6 +13,7 @@ class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
     
     //MARK:- Outlets
     
+    @IBOutlet weak var scannerView: UIView!
     @IBOutlet weak var QRimageView: UIImageView!
     @IBOutlet weak var scanButton: UIButton!
     
@@ -24,15 +25,61 @@ class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         // Hide scan button
         scanButton.isHidden = true
+        
+        //Add scanner to subView
+        view.addSubview(scannerView)
+       
         scan()
+        viewAnimate(till: true)
+      
+    }
+    
+    
+    func moveUp(view: UIView) {
+        view.center.y -= QRimageView.frame.height - 20.0
+    }
+    
+    func moveDown(view: UIView) {
+        view.center.y += QRimageView.frame.height - 20.0
+    }
+    
+    func viewAnimate(till: Bool) {
+        
+         view.addSubview(scannerView)
+        
+        if till == true {
+            
+            let duration: Double = 1.75
+            UIView.animate(withDuration: duration, animations: {
+                self.moveDown(view: self.scannerView)
+                
+            }) { (finished) in
+                if finished {
+                    UIView.animate(withDuration: duration, animations: {
+                        self.moveUp(view: self.scannerView)
+                    }, completion: { (finished) in
+                        if finished {
+                             //call func viewAnimate recursive
+                            self.viewAnimate(till: true)
+                        }
+                    })
+                }
+            }
+        }
+        
     }
     
     
     //MARK:- Scan start function
     
     func scan() {
+        
+//        let pinchRecognizer = UIPinchGestureRecognizer(target: self, action:#selector(pinch(_:)))
+//        self.view.addGestureRecognizer(pinchRecognizer)
+        
         
         // Retake button hide
         scanButton.isHidden = true
@@ -175,6 +222,38 @@ class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
         }))
         present(alert,animated: true,completion: nil)
     }
+    
+//
+//    func pinch(_pinch: UIPinchGestureRecognizer) {
+//        var device: AVCaptureDevice = self.videoDevice
+//        var vZoomFactor = ((UIGestureRecognizer() as! UIPinchGestureRecognizer).scale)
+//        var error:NSError!
+//        do{
+//            try device.lockForConfiguration()
+//            defer {device.unlockForConfiguration()}
+//            if (vZoomFactor <= device.activeFormat.videoMaxZoomFactor){
+//                device.videoZoomFactor = vZoomFactor
+//            }else{
+//                NSLog("Unable to set videoZoom: (max %f, asked %f)", device.activeFormat.videoMaxZoomFactor, vZoomFactor);
+//            }
+//        }catch error as NSError{
+//            NSLog("Unable to set videoZoom: %@", error.localizedDescription);
+//        }catch _{
+//
+//        }
+//    }
+    
+    //Get the device (Front or Back)
+//    func getDevice(position: AVCaptureDevice.Position) -> AVCaptureDevice? {
+//        let devices: NSArray = AVCaptureDevice.devices() as NSArray;
+//        for de in devices {
+//            let deviceConverted = de as! AVCaptureDevice
+//            if(deviceConverted.position == position){
+//                return deviceConverted
+//            }
+//        }
+//        return nil
+//    }
     
 }
 

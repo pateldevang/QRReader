@@ -29,7 +29,7 @@
                                 <rect key="frame" x="110.5" y="560" width="154" height="39"/>
                                 <color key="backgroundColor" red="1" green="0.69410232839999997" blue="0.0" alpha="0.78836686639999998" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="154" id="Dsr-yi-W0C"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="154" id="Dsr-yi-W0C"/>
                                     <constraint firstAttribute="height" constant="39" id="nCJ-pp-GtH"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="25"/>
@@ -45,6 +45,11 @@
                                     <action selector="scanAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Nr3-Pr-aOo"/>
                                 </connections>
                             </button>
+                            <view alpha="0.69999999999999996" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CqA-ab-Hud">
+                                <rect key="frame" x="10" y="159" width="354" height="4"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.11426838730462949" green="0.52822657012697405" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -58,6 +63,7 @@
                     <connections>
                         <outlet property="QRimageView" destination="EMO-hw-GGM" id="53f-TP-YQC"/>
                         <outlet property="scanButton" destination="Gi0-Oj-5bq" id="5ti-MP-TB6"/>
+                        <outlet property="scannerView" destination="CqA-ab-Hud" id="9tz-aZ-mJA"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
