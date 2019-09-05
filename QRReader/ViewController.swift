@@ -214,7 +214,7 @@ class ViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
     
     
     
-    //MARK:- Functions for animation
+    //MARK:- Functions for animation View
     
     func moveUp(view: UIView) {
         view.center.y -= QRimageView.frame.height - 20.0
